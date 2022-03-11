@@ -24,7 +24,7 @@ public class Server {
                 allSocketOnLine.add(socket);
                 //为当前登录成功的socket分配一个独立的线程来处理与之通信
 
-
+                new ServerHandler(socket).start();
 
             }
 
