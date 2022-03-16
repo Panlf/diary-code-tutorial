@@ -9,7 +9,7 @@ import akka.actor.UntypedAbstractActor;
  * 1、创建Actor
  * 2、创建Actor实例
  */
-public class ActorDemo extends UntypedAbstractActor {
+    public class ActorDemo extends UntypedAbstractActor {
 
     //用于接收并处理消息
     @Override

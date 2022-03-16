@@ -19,6 +19,7 @@
     <modules>
         <module>io-tutorial</module>
         <module>akka-tutorial</module>
+        <module>vertx-tutorial</module>
     </modules>
 
 
