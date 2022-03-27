@@ -1,3 +1,6 @@
 {
-  "name": "Hello Vertx , This is Config Test！"
+  "name": "Hello Vertx , This is Config Test！",
+  "http": {
+    "port": 8981
+  }
 }

@@ -2,6 +2,7 @@ package com.plf.diary.starter;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
+import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 
 /**
@@ -11,6 +12,11 @@ import io.vertx.ext.web.Router;
  */
 public class RouterVerticle extends AbstractVerticle {
 
+  public static void main(String[] args) {
+    Vertx vertx = Vertx.vertx();
+    vertx.deployVerticle(RouterVerticle.class.getName());
+  }
+
   Router router;
 
   @Override
@@ -19,10 +25,19 @@ public class RouterVerticle extends AbstractVerticle {
     router = Router.router(vertx);
 
     //配置Router解析URL
-    router.route("/").handler(req -> {
+    router.route("/hello").handler(req -> {
         req.response()
           .putHeader("content-type", "text/plain")
           .end("Hello from Vert.x!");
+    });
+
+    router.get("/getData").handler(req -> {
+        req.response().end("Get Data");
+    });
+
+    router.get("/hello/:name").handler(req -> {
+      String name = req.pathParam("name");
+      req.response().end(String.format("Hello %s",name));
     });
 
 
