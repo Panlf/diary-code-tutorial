@@ -7,6 +7,12 @@ import io.vertx.core.*;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.handler.CSRFHandler;
+import io.vertx.ext.web.handler.CorsHandler;
+import io.vertx.ext.web.handler.LoggerHandler;
+import io.vertx.ext.web.handler.SessionHandler;
+import io.vertx.ext.web.sstore.LocalSessionStore;
+import io.vertx.ext.web.sstore.SessionStore;
 
 /**
  * @author panlf
@@ -23,6 +29,14 @@ public class MainVerticle extends AbstractVerticle {
     @Override
     public void start(Promise<Void> startPromise) throws Exception {
         router = Router.router(vertx);
+
+        SessionStore sessionStore = LocalSessionStore.create(vertx);
+        router.route().handler(LoggerHandler.create());
+        router.route().handler(SessionHandler.create(sessionStore));
+        router.route().handler(CorsHandler.create("localhost"));
+        router.route().handler(CSRFHandler.create(vertx,"secret"));
+
+
         router.route("/hello").handler(this::helloVertx);
         ConfigStoreOptions defaultConfig = new ConfigStoreOptions()
                 .setType("file")

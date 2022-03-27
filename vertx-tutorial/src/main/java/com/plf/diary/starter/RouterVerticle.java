@@ -25,6 +25,7 @@ public class RouterVerticle extends AbstractVerticle {
     router = Router.router(vertx);
 
     //配置Router解析URL
+    //一般作为默认的地址
     router.route("/hello").handler(req -> {
         req.response()
           .putHeader("content-type", "text/plain")

@@ -29,7 +29,7 @@ public class TemplateVerticle extends AbstractVerticle {
     router = Router.router(vertx);
 
     thymeleafTemplateEngine = ThymeleafTemplateEngine.create(vertx);
-
+    //StaticHandler.create("templates")
     router.route("/static/*").handler(StaticHandler.create());
 
     //配置Router解析URL
