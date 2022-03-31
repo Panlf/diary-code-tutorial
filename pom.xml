@@ -21,6 +21,7 @@
         <module>akka-tutorial</module>
         <module>vertx-tutorial</module>
         <module>rabbitmq-tutorial</module>
+        <module>zookeeper-tutorial</module>
     </modules>
 
 
