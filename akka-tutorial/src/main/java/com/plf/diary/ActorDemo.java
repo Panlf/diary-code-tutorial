@@ -15,6 +15,7 @@ public class ActorDemo extends UntypedAbstractActor {
     @Override
     public void onReceive(Object message) throws Throwable {
         if(message instanceof String){
+
             System.out.println("message is ===>" + message.toString());
         } else {
             unhandled(message);
