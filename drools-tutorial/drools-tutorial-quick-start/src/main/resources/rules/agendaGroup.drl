@@ -1,0 +1,31 @@
+package agendaGroup
+
+rule "rule_agenda_group_1"
+    agenda-group "agenda_group_1"
+    when
+    then
+        System.out.println("规则rule_agenda_group_1触发了");
+end
+
+rule "rule_agenda_group_2"
+    agenda-group "agenda_group_1"
+    auto-focus true // 当前所属组自动获取焦点
+    when
+    then
+        System.out.println("规则rule_agenda_group_2触发了");
+end
+
+
+rule "rule_agenda_group_3"
+    agenda-group "agenda_group_2"
+    when
+    then
+        System.out.println("规则rule_agenda_group_3触发了");
+end
+
+rule "rule_agenda_group_4"
+    agenda-group "agenda_group_2"
+    when
+    then
+        System.out.println("规则rule_agenda_group_4触发了");
+end

@@ -1,0 +1,7 @@
+package helloworld
+
+rule "rule_HelloWorld"
+    when
+    then
+        System.out.println("Hello World,SpringBoot Drolls");
+end

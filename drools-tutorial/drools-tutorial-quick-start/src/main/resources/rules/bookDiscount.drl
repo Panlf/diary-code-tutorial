@@ -1,0 +1,41 @@
+package book.discount
+
+import com.plf.diary.drools.entity.Order
+
+// 所购图书总价在100元以下的没有优惠
+rule "book_discount_1"
+    when
+        $order:Order(originalPrice < 100) //模式匹配，到规则引擎中（工作内存）查找Order对象
+    then
+        $order.setRealPrice($order.getOriginalPrice());
+        System.out.println("成功匹配到规则一");
+end
+
+// 所购图书总价在100元到200元的优惠20元
+rule "book_discount_2"
+    when
+        $order:Order(originalPrice >= 100 && originalPrice < 200) //模式匹配，到规则引擎中（工作内存）查找Order对象
+    then
+        $order.setRealPrice($order.getOriginalPrice()-20);
+        System.out.println("成功匹配到规则二");
+end
+
+// 所购图书总价在200元到300元的优惠50元
+rule "book_discount_3"
+    when
+        $order:Order(originalPrice >= 200 && originalPrice < 300) //模式匹配，到规则引擎中（工作内存）查找Order对象
+    then
+        $order.setRealPrice($order.getOriginalPrice()-50);
+        System.out.println("成功匹配到规则三");
+end
+
+
+// 所购图书总价在300元以上优惠100元
+rule "book_discount_4"
+    when
+        //Order 为类型约束  originalPrice为属性约束
+        $order:Order(originalPrice >= 300) //模式匹配，到规则引擎中（工作内存）查找Order对象
+    then
+        $order.setRealPrice($order.getOriginalPrice()-100);
+        System.out.println("成功匹配到规则四");
+end

@@ -1,0 +1,28 @@
+package testrhs
+
+rule "rule_rhs_3"
+    when
+    then
+        System.out.println("rule_rhs_3触发了");
+        System.out.println(drools.getWorkingMemory());
+end
+
+rule "rule_rhs_4"
+    when
+    then
+        System.out.println("rule_rhs_4触发了");
+        System.out.println(drools.getRule());
+end
+
+rule "rule_rhs_1"
+    when
+    then
+        System.out.println("rule_rhs_1触发了");
+        drools.halt();
+end
+
+rule "rule_rhs_2"
+    when
+    then
+        System.out.println("rule_rhs_2触发了");
+end
