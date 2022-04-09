@@ -24,6 +24,7 @@
         <module>zookeeper-tutorial</module>
         <module>spring-security-tutorial</module>
         <module>drools-tutorial</module>
+        <module>activiti-tutorial</module>
     </modules>
 
 
