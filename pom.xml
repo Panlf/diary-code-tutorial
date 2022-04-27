@@ -25,6 +25,7 @@
         <module>spring-security-tutorial</module>
         <module>drools-tutorial</module>
         <module>activiti-tutorial</module>
+        <module>flowable-tutorial</module>
     </modules>
 
 
