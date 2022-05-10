@@ -26,6 +26,7 @@
         <module>drools-tutorial</module>
         <module>activiti-tutorial</module>
         <module>flowable-tutorial</module>
+        <module>hadoop-tutorial</module>
     </modules>
 
 
