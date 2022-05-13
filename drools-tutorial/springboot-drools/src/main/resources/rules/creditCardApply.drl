@@ -1,0 +1,60 @@
+package creditCardApply
+
+import com.plf.diary.drools.entity.CreditCardApplyInfo
+
+rule "rule_credit_apply_如果申请人既没房也没车，同时学历为大专以下，并且月薪少于5000，那么不通过"
+    salience 10
+    no-loop true
+    when
+        $c:CreditCardApplyInfo(hasCar == false && hasHouse == false &&
+                education == CreditCardApplyInfo.EDUCATION_1 &&
+                monthlyIncome < 5000)
+    then
+        $c.setCheckResult(false);
+        drools.halt();
+end
+
+rule "rule_credit_apply_如果申请人既没房也没车，同时学历为大专或者本科，并且月薪少于3000，那么不通过"
+    salience 10
+    no-loop true
+    when
+        $c:CreditCardApplyInfo(hasCar == false && hasHouse == false &&
+                (education == CreditCardApplyInfo.EDUCATION_2 || education == CreditCardApplyInfo.EDUCATION_3) &&
+                monthlyIncome < 3000)
+    then
+        $c.setCheckResult(false);
+        drools.halt();
+end
+
+rule "rule_credit_apply_如果申请人既没房也没车，同时学历为本科以上，并且月薪少于2000，同时之前没有信用卡，那么不通过"
+    salience 10
+    no-loop true
+    when
+        $c:CreditCardApplyInfo(hasCar == false && hasHouse == false &&
+                education == CreditCardApplyInfo.EDUCATION_4 &&
+                monthlyIncome < 2000 &&
+                hasCreditCardCount == 0)
+    then
+        $c.setCheckResult(false);
+        drools.halt();
+end
+
+rule "rule_credit_apply_如果申请人现有信用卡数量大于10，那么不通过"
+    salience 10
+    no-loop true
+    when
+        $c:CreditCardApplyInfo(hasCreditCardCount > 10)
+    then
+        $c.setCheckResult(false);
+        drools.halt();
+end
+
+rule "rule_credit_apply_如果申请人有房有车，或者月收入在20000以上，那么发放的信用卡额度为15000"
+    salience 5
+    no-loop true
+    activation-group "quota_group"
+    when
+        $c:CreditCardApplyInfo((hasCar == true || hasHouse == true) && (monthlyIncome > 20000) && checkResult == true)
+    then
+        $c.setQuota(15000);
+end

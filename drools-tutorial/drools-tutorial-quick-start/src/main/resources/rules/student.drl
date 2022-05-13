@@ -1,0 +1,49 @@
+package student
+
+import com.plf.diary.drools.entity.Student
+
+rule "要求Student的age等于10岁 删除"
+    //salience 10
+    enabled false
+    when
+        $student:Student(age == 10)
+    then
+        retract($student)
+        System.out.println("要求Student的age等于10岁 - 删除 - 规则触发");
+end
+
+
+rule "要求Student的age等于10岁"
+    when
+        $student:Student(age == 10)
+    then
+        Student s = new Student();
+        s.setAge(15);
+        insert(s); //insert方法作用是向工作内存中插入Fact对象，会导致相关规则重新匹配
+        System.out.println("要求Student的age等于10岁 - 规则触发");
+end
+
+rule "要求Student的age大于10岁并且小于10岁"
+    when
+        $student:Student(age < 20 && age > 10)
+    then
+        $student.setAge(25);
+        update($student);//update方法作用是向工作内存中更新Fact对象，会导致相关规则重新匹配
+        System.out.println("要求Student的age大于10岁并且小于10岁 - 规则触发");
+end
+
+rule "要求Student的age大于20岁"
+    when
+        $student:Student(age > 20)
+    then
+        System.out.println("要求Student的age大于20岁 - 规则触发");
+end
+
+rule "rule_no_loop"
+    no-loop true // 使用no-loop 解决死循环问题
+    when
+        $student:Student(age == 10)
+    then
+        update($student)
+        System.out.println("rule_no_loop - 规则触发");
+end

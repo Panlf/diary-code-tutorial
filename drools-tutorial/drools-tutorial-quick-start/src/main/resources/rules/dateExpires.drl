@@ -1,0 +1,9 @@
+package dateExpires
+
+
+rule "rule_date_expires_1"
+    date-effective "2020-11-20 23:25" // 失效时间
+    when
+    then
+        System.out.println("规则rule_date_expires_1触发");
+end

@@ -1,0 +1,15 @@
+package testfunction
+
+import com.plf.diary.drools.entity.Student
+
+function String sayHello(String name){
+    return "Hello "+name;
+}
+
+rule "rule_function_1"
+    when
+        $S:Student(age==28)
+    then
+        String result = sayHello($S.getName());
+        System.out.println("调用testfunction.sayHello,获得结果:"+result);
+end

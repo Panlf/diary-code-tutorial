@@ -1,0 +1,23 @@
+package testglobal
+
+global java.lang.Integer count //定义包装类型的全局变量
+global java.util.List gList //定义集合类型的全局变量
+
+rule "rule_global_1"
+    when
+    then
+       // count += 10;
+        System.out.println("rule_global_1触发了");
+        //System.out.println("全局变量count计算之后的值为:"+count);
+
+        //gList.add("global");
+        //System.out.println("全局变量gList的size:"+gList.size());
+end
+
+rule "rule_global_2"
+    when
+    then
+        System.out.println("rule_global_2触发了");
+        System.out.println("全局变量count计算之后的值为:"+count);
+        //System.out.println("全局变量gList的size:"+gList.size());
+end

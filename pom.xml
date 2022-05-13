@@ -22,6 +22,11 @@
         <module>vertx-tutorial</module>
         <module>rabbitmq-tutorial</module>
         <module>zookeeper-tutorial</module>
+        <module>spring-security-tutorial</module>
+        <module>drools-tutorial</module>
+        <module>activiti-tutorial</module>
+        <module>flowable-tutorial</module>
+        <module>hadoop-tutorial</module>
     </modules>
 
 

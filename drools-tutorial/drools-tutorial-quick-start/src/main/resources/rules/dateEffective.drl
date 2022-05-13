@@ -1,0 +1,9 @@
+package dateEffective
+
+
+rule "rule_date_effective_1"
+    date-effective "2020-11-20 23:22"
+    when
+    then
+        System.out.println("规则rule_date_effective_1触发");
+end

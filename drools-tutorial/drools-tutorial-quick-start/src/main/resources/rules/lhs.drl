@@ -1,0 +1,31 @@
+package testlhs
+
+import com.plf.diary.drools.entity.Student
+
+rule "rule_lhs_1"
+    when
+        $s:Student(name in ("J","Y"))
+    then
+        System.out.println("rule_lhs_1触发了");
+end
+
+rule "rule_lhs_2"
+    when
+        not Student()
+    then
+        System.out.println("rule_lhs_2触发了");
+end
+
+rule "rule_lhs_3"
+    when
+        exists Student(age > 20)
+    then
+        System.out.println("rule_lhs_3触发了");
+end
+
+rule "rule_lhs_4" extends "rule_lhs_3"
+    when
+        exists Student(age < 30)
+    then
+        System.out.println("rule_lhs_4触发了");
+end

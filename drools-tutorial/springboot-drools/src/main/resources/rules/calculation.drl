@@ -1,0 +1,121 @@
+package calculation
+
+import com.plf.diary.drools.entity.Calculation
+
+/**
+
+    当前规则文件中的规则主要分为三类
+    1、计算应纳税所得额
+    2、设置税率、速算扣除数
+    3、计算税后工资
+*/
+
+rule "rule_calculation_计算应纳税所得额"
+    enabled true
+    salience 3
+    date-effective "2020-11-24"
+    no-loop true
+    when
+        $cal:Calculation(wage>0)
+    then
+        double wagemore = $cal.getWage() - 3500 ;
+        $cal.setWagemore(wagemore);
+        update($cal);
+end
+
+
+//设置税率、速算扣除数
+rule "rule_calculation_设置税率，应纳税所得额<=1500"
+    salience 2
+    no-loop true
+    activation-group "SETCess_Group"
+    when
+        $cal:Calculation(wagemore <= 1500)
+    then
+        $cal.setCess(0.03);//税率
+        $cal.setPreminus(0);//速算扣除数
+        update($cal);
+end
+
+rule "rule_calculation_设置税率，应纳税所得额1500至4500之间"
+    salience 2
+    no-loop true
+    activation-group "SETCess_Group"
+    when
+        $cal:Calculation(wagemore > 1500 && wagemore <= 4500)
+    then
+        $cal.setCess(0.1);//税率
+        $cal.setPreminus(105);//速算扣除数
+        update($cal);
+end
+
+rule "rule_calculation_设置税率，应纳税所得额4500至9000之间"
+    salience 2
+    no-loop true
+    activation-group "SETCess_Group"
+    when
+        $cal:Calculation(wagemore > 4500 && wagemore <= 9000)
+    then
+        $cal.setCess(0.2);//税率
+        $cal.setPreminus(555);//速算扣除数
+        update($cal);
+end
+
+rule "rule_calculation_设置税率，应纳税所得额9000至35000之间"
+    salience 2
+    no-loop true
+    activation-group "SETCess_Group"
+    when
+        $cal:Calculation(wagemore > 9000 && wagemore <= 35000)
+    then
+        $cal.setCess(0.25);//税率
+        $cal.setPreminus(1005);//速算扣除数
+        update($cal);
+end
+
+rule "rule_calculation_设置税率，应纳税所得额35000至55000之间"
+    salience 2
+    no-loop true
+    activation-group "SETCess_Group"
+    when
+        $cal:Calculation(wagemore > 35000 && wagemore <= 55000)
+    then
+        $cal.setCess(0.3);//税率
+        $cal.setPreminus(2755);//速算扣除数
+        update($cal);
+end
+
+rule "rule_calculation_设置税率，应纳税所得额55000至80000之间"
+    salience 2
+    no-loop true
+    activation-group "SETCess_Group"
+    when
+        $cal:Calculation(wagemore > 55000 && wagemore <= 80000)
+    then
+        $cal.setCess(0.35);//税率
+        $cal.setPreminus(5505);//速算扣除数
+        update($cal);
+end
+
+rule "rule_calculation_设置税率，应纳税所得额80000以上"
+    salience 2
+    no-loop true
+    activation-group "SETCess_Group"
+    when
+        $cal:Calculation(wagemore > 80000)
+    then
+        $cal.setCess(0.45);//税率
+        $cal.setPreminus(13505);//速算扣除数
+        update($cal);
+end
+
+rule "rule_calculation_个人所得税:计算税后工资"
+    when
+        $cal:Calculation(wage > 0 && wagemore > 0 && cess > 0)
+    then
+        //扣税额
+        double wageminus = $cal.getWagemore()*$cal.getCess() - $cal.getPreminus();
+        double actualwage = $cal.getWage() - wageminus;
+        $cal.setWageminus(wageminus);
+        $cal.setActualwage(actualwage);
+end

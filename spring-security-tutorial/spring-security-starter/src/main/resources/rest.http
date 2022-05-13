@@ -1,0 +1,7 @@
+###
+GET http://localhost:8080/api/greeting
+Authorization: Basic user caa2ecf6-19f1-4179-bdaf-97b71ef30412
+
+###
+POST http://localhost:8080/api/greeting?name=Breeze
+Authorization: Basic user caa2ecf6-19f1-4179-bdaf-97b71ef30412
