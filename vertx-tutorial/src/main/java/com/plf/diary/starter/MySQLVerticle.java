@@ -35,7 +35,7 @@ public class MySQLVerticle extends AbstractVerticle {
     .setHost("127.0.0.1")
     .setDatabase("test")
     .setUser("root")
-    .setPassword("root");
+    .setPassword("123456");
 
   PoolOptions poolOptions = new PoolOptions()
     .setMaxSize(5);
