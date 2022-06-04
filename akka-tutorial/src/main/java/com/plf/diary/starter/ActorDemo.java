@@ -1,4 +1,4 @@
-package com.plf.diary;
+package com.plf.diary.starter;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -65,7 +65,5 @@ import scala.concurrent.duration.Duration;
             }
             return message.get();
         }, actorSystem.dispatcher());
-
-        System.out.println(future.isCompleted());
     }
 }
