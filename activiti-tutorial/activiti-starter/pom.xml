@@ -15,45 +15,39 @@
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-engine</artifactId>
-            <version>7.0.0.Beta1</version>
+            <version>7.0.0.GA</version>
         </dependency>
 
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-spring</artifactId>
-            <version>7.0.0.Beta1</version>
+            <version>7.0.0.GA</version>
         </dependency>
 
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-bpmn-model</artifactId>
-            <version>7.0.0.Beta1</version>
+            <version>7.0.0.GA</version>
         </dependency>
 
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-bpmn-converter</artifactId>
-            <version>7.0.0.Beta1</version>
+            <version>7.0.0.GA</version>
         </dependency>
 
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-json-converter</artifactId>
-            <version>7.0.0.Beta1</version>
+            <version>7.0.0.GA</version>
         </dependency>
 
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-bpmn-layout</artifactId>
-            <version>7.0.0.Beta1</version>
+            <version>7.0.0.GA</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.activiti.cloud</groupId>
-            <artifactId>activiti-cloud-services-api</artifactId>
-            <version>7.0.0.Beta1</version>
-        </dependency>
-
+        
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
