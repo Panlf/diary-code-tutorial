@@ -5,7 +5,7 @@ import akka.actor.Props;
 import akka.actor.UntypedAbstractActor;
 
 public class ForwardActor extends UntypedAbstractActor {
-    private ActorRef targetActor = getContext().actorOf(Props.create(TargetActor.class),"targetActor");
+    private final ActorRef targetActor = getContext().actorOf(Props.create(TargetActor.class),"targetActor");
 
     @Override
     public void onReceive(Object message) throws Throwable {
