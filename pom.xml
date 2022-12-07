@@ -28,6 +28,7 @@
         <module>flowable-tutorial</module>
         <module>hadoop-tutorial</module>
         <module>elasticsearch-tutorial</module>
+        <module>java11-tutorial</module>
     </modules>
 
 
