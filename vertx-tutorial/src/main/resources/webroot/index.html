@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ChatRoom</title>
+  <script src="https://unpkg.io/sockjs-client@1.5.0/dist/sockjs.min.js"></script>
+  <script src='https://unpkg.io/@vertx/eventbus-bridge-client.js@1.0.0-1/vertx-eventbus.js'></script>
+
+  <script type="text/javascript">
+    //var eb = new EventBus('http://localhost:8888/eventbus');
+    var eb = new EventBus('/eventbus/')
+
+    eb.onopen = () => {
+      eb.registerHandler('chatroom', (error, message) => {
+        //console.log('received a message: ' + JSON.stringify(message));
+        let body = message.body
+
+        let tt = document.getElementById("textarea")
+
+        tt.textContent  = tt.textContent + `${body.name}:${body.content}\n`
+      });
+
+      let contentInput = document.getElementById("contentInput")
+      contentInput.addEventListener('keydown',(event)=>{
+        let name = document.getElementById("nameInput").value
+
+        const  keyName = event.key
+        if(keyName === 'Enter'){
+          eb.publish('chatroom',{name:name,content:contentInput.value})
+          contentInput.value = ''
+        }
+      })
+    }
+  </script>
+</head>
+<body>
+<div>
+  <label for="textarea">ChatRoom</label>
+  <textarea id="textarea" rows="20" cols="100"></textarea>
+</div>
+<div>
+  <label for="nameInput">你的名字：</label><input id="nameInput" type="text"/>
+</div>
+<div>
+  <label for="contentInput">你要说的话：</label><input id="contentInput" type="text"/>
+</div>
+</body>
+</html>
