@@ -29,6 +29,7 @@
         <module>hadoop-tutorial</module>
         <module>elasticsearch-tutorial</module>
         <module>java11-tutorial</module>
+        <module>nacos-tutorial</module>
     </modules>
 
 
