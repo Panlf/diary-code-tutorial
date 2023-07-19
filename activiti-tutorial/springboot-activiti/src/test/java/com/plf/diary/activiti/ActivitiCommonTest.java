@@ -53,8 +53,8 @@ public class ActivitiCommonTest {
         RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
 
         Deployment deploy = repositoryService.createDeployment()
-                .addClasspathResource("flow/test3.bpmn20.xml")
-                .name("请假流程-监听器")
+                .addClasspathResource("flow/gateway2.bpmn20.xml")
+                .name("并行网关")
                 .deploy(); //是一个流程部署的行为，可以部署多个流程定义
         System.out.println(deploy.getId());
         System.out.println(deploy.getName());
@@ -101,7 +101,7 @@ public class ActivitiCommonTest {
         // 发起流程  需要通过 runtimeService 来实现
         RuntimeService runtimeService = defaultProcessEngine.getRuntimeService();
         // 通过流程定义ID来启动流程 返回的是流程实例对象
-        ProcessInstance processInstance = runtimeService.startProcessInstanceById("test3:1:20003");
+        ProcessInstance processInstance = runtimeService.startProcessInstanceById("gateway2:1:40003");
 
         // 2501
         System.out.println("id : "+processInstance.getId());
@@ -150,7 +150,7 @@ public class ActivitiCommonTest {
         // 待办查询 执行中的任务处理通过 TaskService 来实现
         TaskService taskService = defaultProcessEngine.getTaskService();
         // Task 对象对应的其实就是 act_ru_task 这张表的记录
-        List<Task> taskList = taskService.createTaskQuery().taskAssignee("张三").list();
+        List<Task> taskList = taskService.createTaskQuery().taskAssignee("zhangsan").list();
 
         if(!CollectionUtils.isEmpty(taskList)){
             taskList.forEach(x->{
