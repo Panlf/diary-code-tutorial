@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="event01-timer-begin" name="event01-timer-begin" isExecutable="true">
+    <documentation>event01-timer-begin</documentation>
+    <userTask id="sid-FBE794D7-5DF7-421F-97E7-81885856AF93" name="用户任务"></userTask>
+    <endEvent id="sid-3B413273-7404-4898-A2AD-C71BA5C92CB8"></endEvent>
+    <sequenceFlow id="sid-09EC8761-8176-4234-8A05-B271378789E8" sourceRef="sid-FBE794D7-5DF7-421F-97E7-81885856AF93" targetRef="sid-3B413273-7404-4898-A2AD-C71BA5C92CB8"></sequenceFlow>
+    <intermediateCatchEvent id="sid-BD999E0B-71EE-4F6C-8766-D674F79943C9" name="定时器开始事件">
+      <timerEventDefinition>
+        <timeDate>2023-07-23T00:00:00</timeDate>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="sid-7FB145B6-5934-49FA-A620-671688AD3F2D" sourceRef="sid-BD999E0B-71EE-4F6C-8766-D674F79943C9" targetRef="sid-FBE794D7-5DF7-421F-97E7-81885856AF93"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_event01-timer-begin">
+    <bpmndi:BPMNPlane bpmnElement="event01-timer-begin" id="BPMNPlane_event01-timer-begin">
+      <bpmndi:BPMNShape bpmnElement="sid-FBE794D7-5DF7-421F-97E7-81885856AF93" id="BPMNShape_sid-FBE794D7-5DF7-421F-97E7-81885856AF93">
+        <omgdc:Bounds height="80.0" width="99.99999999999997" x="174.99999739229682" y="137.99999794363978"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-3B413273-7404-4898-A2AD-C71BA5C92CB8" id="BPMNShape_sid-3B413273-7404-4898-A2AD-C71BA5C92CB8">
+        <omgdc:Bounds height="28.0" width="28.0" x="320.0" y="164.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-BD999E0B-71EE-4F6C-8766-D674F79943C9" id="BPMNShape_sid-BD999E0B-71EE-4F6C-8766-D674F79943C9">
+        <omgdc:Bounds height="31.0" width="30.999999999999986" x="89.9999986588955" y="162.49999757856133"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-7FB145B6-5934-49FA-A620-671688AD3F2D" id="BPMNEdge_sid-7FB145B6-5934-49FA-A620-671688AD3F2D">
+        <omgdi:waypoint x="121.99985742800497" y="178.43277132958235"></omgdi:waypoint>
+        <omgdi:waypoint x="174.99999739229682" y="178.210081826095"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-09EC8761-8176-4234-8A05-B271378789E8" id="BPMNEdge_sid-09EC8761-8176-4234-8A05-B271378789E8">
+        <omgdi:waypoint x="274.9999973922968" y="177.99999888692426"></omgdi:waypoint>
+        <omgdi:waypoint x="320.0" y="177.99999973588035"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
