@@ -5,6 +5,7 @@ import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.junit.jupiter.api.Test;
 
@@ -139,6 +140,89 @@ public class ActivitiEventTest {
                 .addClasspathResource("flow/event-time-boundary.bpmn20.xml")
                 // 当我们审批通过 申请出库 后，等待一分钟触发定时器。然后会进入到 出库处理
                 .name("定时器边界事件")
+                .deploy(); //是一个流程部署的行为，可以部署多个流程定义
+        System.out.println(deploy.getId());
+        System.out.println(deploy.getName());
+    }
+
+
+    /**
+     * 消息事件
+     *  消息事件（message event），是指引用具名消息的事件。消息具有名字与载荷。与信号不同，消息事件只有一个接收者。
+     */
+
+
+    /**
+     * 开始事件
+     * 消息开始事件，也就是我们通过接收到某些消息后来启动流程实例，比如接收到了一封邮件，一条短信等，具体通过案例来讲解。
+     */
+    @Test
+    public void test06() {
+        // 1. 获取ProcessEngine对象
+        ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
+        // 2. 完成流程的部署操作 需要通过RepositoryService来完成
+        RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
+
+        Deployment deploy = repositoryService.createDeployment()
+                .addClasspathResource("flow/event-message-start.bpmn20.xml")
+                .name("消息启动事件")
+                .deploy(); //是一个流程部署的行为，可以部署多个流程定义
+        System.out.println(deploy.getId());
+        System.out.println(deploy.getName());
+        //部署完流程后，消息启动事件会在act_ru_event_subscr中记录我们的定义信息。
+    }
+
+    @Test
+    public void test07() {
+        ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
+        RuntimeService runtimeService = defaultProcessEngine.getRuntimeService();
+        //发送消息 发送的消息应该是具体的消息的名称而不是id
+        //注意 消息的名称我们不要使用驼峰命名法来定义
+        runtimeService.startProcessInstanceByMessage("firstmsg");
+    }
+
+    /**
+     * 消息中间事件就是在流程运行中需要消息来触发场景，案例演示，自动流程1处理完成后，需要接收特定的消息之后才能进入到自动流程2
+     */
+    @Test
+    public void test08() {
+        // 1. 获取ProcessEngine对象
+        ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
+        // 2. 完成流程的部署操作 需要通过RepositoryService来完成
+        RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
+        Deployment deploy = repositoryService.createDeployment()
+                .addClasspathResource("flow/event-message-middle.bpmn20.xml")
+                .name("消息中间事件")
+                .deploy(); //是一个流程部署的行为，可以部署多个流程定义
+        System.out.println(deploy.getId());
+        System.out.println(deploy.getName());
+    }
+
+    @Test
+    public void test09(){
+        ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
+        RuntimeService runtimeService = defaultProcessEngine.getRuntimeService();
+        Execution execution = runtimeService
+                .createExecutionQuery()
+                .processInstanceId("")
+                .onlyChildExecutions()
+                .singleResult();
+        runtimeService.messageEventReceived("msg02",execution.getId());
+    }
+
+    /**
+     * 边界事件
+     * 消息边界事件同样针对是用户节点在消息触发前如果还没有审批。就会触发消息事件的处理逻辑。
+     */
+    @Test
+    public void test10() {
+        // 1. 获取ProcessEngine对象
+        ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
+        // 2. 完成流程的部署操作 需要通过RepositoryService来完成
+        RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
+        Deployment deploy = repositoryService.createDeployment()
+                .addClasspathResource("flow/event-message-boundary.bpmn20.xml")
+                .name("消息边界事件")
                 .deploy(); //是一个流程部署的行为，可以部署多个流程定义
         System.out.println(deploy.getId());
         System.out.println(deploy.getName());
