@@ -30,6 +30,5 @@ public class BusinessKeyAdd {
 
         //4、输出processInstance相关属性
         System.out.println(processInstance.getBusinessKey());
-
     }
 }

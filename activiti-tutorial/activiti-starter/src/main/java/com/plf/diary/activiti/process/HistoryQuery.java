@@ -22,7 +22,8 @@ public class HistoryQuery {
         HistoryService historyService = processEngine.getHistoryService();
 
         //3、HistoricActivityInstanceQuery
-        HistoricActivityInstanceQuery historicActivityInstanceQuery = historyService.createHistoricActivityInstanceQuery();
+        HistoricActivityInstanceQuery historicActivityInstanceQuery =
+                historyService.createHistoricActivityInstanceQuery();
 
         //设置流程实例ID
         historicActivityInstanceQuery.processInstanceId("2501");

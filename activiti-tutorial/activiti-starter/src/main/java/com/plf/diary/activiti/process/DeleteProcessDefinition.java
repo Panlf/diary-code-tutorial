@@ -3,6 +3,7 @@ package com.plf.diary.activiti.process;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
 
@@ -34,6 +35,12 @@ public class DeleteProcessDefinition {
         //2、创建RepositoryService对象
         RepositoryService repositoryService = processEngine.getRepositoryService();
 
+        //删除流程定义
         repositoryService.deleteDeployment("1");
+
+        TaskService taskService = processEngine.getTaskService();
+
+        //强制删除正在运行中的流程
+        processEngine.getRuntimeService().deleteProcessInstance("","");
     }
 }
