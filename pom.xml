@@ -31,6 +31,7 @@
         <module>java11-tutorial</module>
         <module>nacos-tutorial</module>
         <module>quartz-tutorial</module>
+        <module>influxdb-tutorial</module>
     </modules>
 
 
